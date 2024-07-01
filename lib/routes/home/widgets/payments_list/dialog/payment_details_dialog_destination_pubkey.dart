@@ -13,11 +13,11 @@ class PaymentDetailsDestinationPubkey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final texts = context.texts();
     final destinationPubkey = paymentMinutiae.swapId;
     if (destinationPubkey.isNotEmpty) {
       return ShareablePaymentRow(
-        title: texts.payment_details_dialog_single_info_node_id,
+        // TODO: Move this message to Breez-Translations
+        title: "Swap ID",
         sharedValue: destinationPubkey,
       );
     } else {
