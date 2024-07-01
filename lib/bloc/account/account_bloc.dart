@@ -335,4 +335,16 @@ class AccountBloc extends Cubit<AccountState> with HydratedMixin {
     // TODO: Liquid - Return chronologically sorted list
     return filteredPayments.reversed.toList();
   }
+
+  Future<liquid_sdk.LnUrlPayResult> lnurlPay({
+    required liquid_sdk.LnUrlPayRequest req,
+  }) async {
+    try {
+      return await _breezLiquidSdk.wallet!.lnurlPay(req: req);
+    } catch (e) {
+      _log.severe("lnurlPay error", e);
+      rethrow;
+    }
+  }
+
 }
