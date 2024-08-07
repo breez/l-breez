@@ -56,10 +56,13 @@ class PaymentsCubit extends Cubit<PaymentsState> with HydratedMixin {
     emit(newState);
   }
 
-  Future<PrepareSendResponse> prepareSendPayment(String invoice) async {
-    _log.info("prepareSendPayment\nPreparing send payment for invoice: $invoice");
+  Future<PrepareSendResponse> prepareSendPayment({
+    required String destination,
+    BigInt? amountSat,
+  }) async {
+    _log.info("prepareSendPayment\nPreparing send payment for destination: $destination");
     try {
-      final req = PrepareSendRequest(invoice: invoice);
+      final req = PrepareSendRequest(destination: destination, amountSat: amountSat);
       return await _liquidSdk.instance!.prepareSendPayment(req: req);
     } catch (e) {
       _log.severe("prepareSendPayment\nError preparing send payment", e);
@@ -67,9 +70,10 @@ class PaymentsCubit extends Cubit<PaymentsState> with HydratedMixin {
     }
   }
 
-  Future<SendPaymentResponse> sendPayment(PrepareSendResponse req) async {
-    _log.info("sendPayment\nSending payment for $req");
+  Future<SendPaymentResponse> sendPayment(PrepareSendResponse prepareResponse) async {
+    _log.info("sendPayment\nSending payment for $prepareResponse");
     try {
+      final req = SendPaymentRequest(prepareResponse: prepareResponse);
       return await _liquidSdk.instance!.sendPayment(req: req);
     } catch (e) {
       _log.severe("sendPayment\nError sending payment", e);
@@ -77,10 +81,16 @@ class PaymentsCubit extends Cubit<PaymentsState> with HydratedMixin {
     }
   }
 
-  Future<PrepareReceivePaymentResponse> prepareReceivePayment(int payerAmountSat) async {
-    _log.info("prepareReceivePayment\nPreparing receive payment for $payerAmountSat sats");
+  Future<PrepareReceiveResponse> prepareReceivePayment({
+    required PaymentMethod paymentMethod,
+    BigInt? amountSat,
+  }) async {
+    _log.info("prepareReceivePayment\nPreparing receive payment for $amountSat sats");
     try {
-      final req = PrepareReceivePaymentRequest(payerAmountSat: BigInt.from(payerAmountSat));
+      final req = PrepareReceiveRequest(
+        paymentMethod: paymentMethod,
+        amountSat: amountSat,
+      );
       return _liquidSdk.instance!.prepareReceivePayment(req: req);
     } catch (e) {
       _log.severe("prepareSendPayment\nError preparing receive payment", e);
@@ -88,11 +98,16 @@ class PaymentsCubit extends Cubit<PaymentsState> with HydratedMixin {
     }
   }
 
-  Future<ReceivePaymentResponse> receivePayment(ReceivePaymentRequest req) async {
+  Future<ReceivePaymentResponse> receivePayment({
+    required PrepareReceiveResponse prepareResponse,
+    String? description,
+  }) async {
     _log.info(
-      "receivePayment\nReceive payment for amount: ${req.prepareRes.payerAmountSat} (sats), fees: ${req.prepareRes.feesSat} (sats), description: ${req.description}",
+      "receivePayment\nReceive ${prepareResponse.paymentMethod.name} payment for amount: "
+      "${prepareResponse.amountSat} (sats), fees: ${prepareResponse.feesSat} (sats), description: $description",
     );
     try {
+      final req = ReceivePaymentRequest(prepareResponse: prepareResponse, description: description);
       return _liquidSdk.instance!.receivePayment(req: req);
     } catch (e) {
       _log.severe("receivePayment\nError receiving payment", e);
