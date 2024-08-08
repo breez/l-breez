@@ -109,7 +109,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          version: 3.22.3
+          flutter-version: 3.22.3
 
       - name: Flutter version
         run: flutter --version
