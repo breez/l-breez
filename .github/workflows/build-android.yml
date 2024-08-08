@@ -111,6 +111,9 @@ jobs:
           channel: 'stable'
           version: 3.22.3
 
+      - name: Flutter version
+        run: flutter --version
+
       - name: Set up just
         if: ${{ needs.setup.outputs.use-published-plugins == 'false' }}
         uses: extractions/setup-just@v2
