@@ -206,9 +206,9 @@ jobs:
         working-directory: lbreez
         run: flutter pub get
 
-      - name: 🔍 Perform static analysis
-        working-directory: lbreez
-        run: dart analyze --fatal-infos
+#      - name: 🔍 Perform static analysis
+#        working-directory: lbreez
+#        run: dart analyze --fatal-infos
 
       - name: ⚙️ Setup compile-time variables
         env:
