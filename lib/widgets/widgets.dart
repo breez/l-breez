@@ -7,6 +7,7 @@ export 'centered_loader.dart';
 export 'compact_qr_image.dart';
 export 'error_dialog.dart';
 export 'flushbar.dart';
+export 'glow_migration_dialog.dart';
 export 'keyboard_done_action.dart';
 export 'loader.dart';
 export 'loading_animated_text.dart';
