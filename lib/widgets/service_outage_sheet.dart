@@ -99,7 +99,7 @@ class _ServiceOutageSheet extends StatelessWidget {
                           'The service Misty Breez relies on is no longer available. As a result, on-chain '
                           'and Lightning payments cannot be made in the app. To mitigate this, we added the '
                           'ability to send and receive with a Liquid address.\n\n'
-                          'You can move your funds to any wallet that can receive an on-chain Bitcoin '
+                          'You can move your funds to any wallet that can receive an on-chain bitcoin '
                           'transaction, using an external service listed ',
                     ),
                     TextSpan(
@@ -111,7 +111,7 @@ class _ServiceOutageSheet extends StatelessWidget {
                     ),
                     const TextSpan(
                       text:
-                          '. We recommend Glow.\n\n'
+                          '. We recommend Glow, a bitcoin app built for everyone.\n\n'
                           'Those are external services, operated by third parties and not by Breez. Breez '
                           'does not endorse them. Use them at your own discretion.',
                     ),
