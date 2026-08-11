@@ -8,11 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final Logger _logger = Logger('ServiceOutagePage');
 
-/// Wind-down notice, carrying the exchange services, the disclaimer and the wallet we
-/// recommend. Kept off the app so the options can change without shipping a release, and
-/// so this page has one thing to say.
-const String _moveFundsUrl = 'https://breez.technology/misty/';
-
 const String _noticeSeenKey = 'service_outage_notice_seen';
 
 /// Opens the notice on startup, once ever.
@@ -73,7 +68,7 @@ class ServiceOutagePage extends StatelessWidget {
         text: 'MOVE YOUR FUNDS',
         onPressed: () {
           _logger.info('Opening the wind-down page');
-          ExternalBrowserService.launchLink(context, linkAddress: _moveFundsUrl);
+          ExternalBrowserService.launchLink(context, linkAddress: ServiceOutage.moveFundsUrl);
         },
       ),
     );
