@@ -16,7 +16,9 @@ const String _glowPlayStoreUrl = 'https://play.google.com/store/apps/details?id=
 /// Page listing the third-party services that can move funds out of this wallet.
 /// Deliberately a link instead of an in-app list, so the options can be changed
 /// without shipping a new app version.
-const String _moveFundsUrl = 'https://breez.technology/misty/move-funds.html';
+///
+/// This is the Misty Breez page itself, rewritten as the wind-down notice.
+const String _moveFundsUrl = 'https://breez.technology/misty/';
 
 const String _noticeSeenKey = 'service_outage_notice_seen';
 
