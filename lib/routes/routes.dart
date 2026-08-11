@@ -9,5 +9,6 @@ export 'qr_scan/qr_scan.dart';
 export 'receive_payment/receive_payment.dart';
 export 'refund/refund.dart';
 export 'security/security.dart';
+export 'service_outage/service_outage.dart';
 export 'send_payment/send_payment.dart';
 export 'splash/splash.dart';

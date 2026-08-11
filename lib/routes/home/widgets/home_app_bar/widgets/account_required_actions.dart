@@ -81,7 +81,7 @@ class ServiceOutageWarningAction extends StatelessWidget {
     return WarningAction(
       onTap: () {
         _logger.info('Display service outage notice.');
-        showServiceOutageSheet(context);
+        Navigator.of(context).pushNamed(ServiceOutagePage.routeName);
       },
     );
   }

@@ -84,6 +84,11 @@ Route<dynamic>? onGenerateRoute({
                       builder: (BuildContext _) => const GetRefundPage(),
                       settings: settings,
                     );
+                  case ServiceOutagePage.routeName:
+                    return FadeInRoute<void>(
+                      builder: (BuildContext _) => const ServiceOutagePage(),
+                      settings: settings,
+                    );
                   case RefundPage.routeName:
                     return FadeInRoute<void>(
                       builder: (BuildContext _) => RefundPage(swapInfo: settings.arguments as RefundableSwap),
