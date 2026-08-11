@@ -58,6 +58,20 @@ class TimeConstants {
   static const int minutesPerDay = 1440;
 }
 
+/// Swap service outage, in effect while the swapper refuses to create swaps.
+///
+/// Gates the startup notice and the home app bar warning. Flip to false when swaps work
+/// again and both disappear.
+class ServiceOutage {
+  /// Private constructor to prevent instantiation
+  ServiceOutage._();
+
+  /// Whether on-chain and Lightning payments are unavailable.
+  // ponytail: a const, not cubit state. Nothing exposes swapper availability, and the outage
+  // is global. Wire it to real state if it ever needs to vary per user or resolve at runtime.
+  static const bool swapsUnavailable = true;
+}
+
 class WebhookConstants {
   /// Private constructor to prevent instantiation
   WebhookConstants._();

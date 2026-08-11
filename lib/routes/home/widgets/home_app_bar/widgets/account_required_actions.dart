@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 import 'package:misty_breez/cubit/cubit.dart';
 import 'package:misty_breez/routes/routes.dart';
+import 'package:misty_breez/utils/utils.dart';
 import 'package:misty_breez/widgets/widgets.dart';
 import 'package:service_injector/service_injector.dart';
 
@@ -21,6 +22,11 @@ class _AccountRequiredActionsIndicatorState extends State<AccountRequiredActions
     return Builder(
       builder: (BuildContext context) {
         final List<Widget> warnings = <Widget>[];
+
+        if (ServiceOutage.swapsUnavailable) {
+          _logger.info('Adding service outage warning.');
+          warnings.add(const ServiceOutageWarningAction());
+        }
 
         final bool hasNonRefunded = context.select<RefundCubit, bool>(
           (RefundCubit cubit) => cubit.state.hasNonRefunded,
@@ -60,6 +66,22 @@ class _AccountRequiredActionsIndicatorState extends State<AccountRequiredActions
           mainAxisSize: MainAxisSize.min,
           children: warnings,
         );
+      },
+    );
+  }
+}
+
+class ServiceOutageWarningAction extends StatelessWidget {
+  static final Logger _logger = Logger('ServiceOutageWarningAction');
+
+  const ServiceOutageWarningAction({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return WarningAction(
+      onTap: () {
+        _logger.info('Display service outage notice.');
+        showServiceOutageSheet(context);
       },
     );
   }
