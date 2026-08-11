@@ -37,7 +37,7 @@ class HomeState extends State<Home> with AutoLockMixin<Home>, HandlerContextProv
       for (Handler handler in handlers) {
         handler.init(this);
       }
-      showGlowMigrationDialog(context);
+      showServiceOutageNoticeIfUnseen(context);
     });
   }
 
