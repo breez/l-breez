@@ -40,8 +40,8 @@ Future<void> showGlowMigrationDialog(BuildContext context) async {
                       'The service Misty Breez relies on is no longer available. As a result, on-chain '
                       'and Lightning payments cannot be made in the app. To mitigate this, we added the '
                       'ability to send and receive with a Liquid address.\n\n'
-                      'We recommend moving to Glow. To move your funds, you can use an external service, '
-                      'listed ',
+                      'You can move your funds to any wallet that can receive an on-chain Bitcoin '
+                      'transaction, using an external service listed ',
                 ),
                 TextSpan(
                   text: 'here',
@@ -52,8 +52,9 @@ Future<void> showGlowMigrationDialog(BuildContext context) async {
                 ),
                 const TextSpan(
                   text:
-                      '.\n\nThose are external services, operated by third parties and not by Breez. '
-                      'Use them at your own discretion.',
+                      '. We recommend Glow.\n\n'
+                      'Those are external services, operated by third parties and not by Breez. Breez '
+                      'does not endorse them. Use them at your own discretion.',
                 ),
               ],
             ),
