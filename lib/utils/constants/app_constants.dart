@@ -70,6 +70,10 @@ class ServiceOutage {
   // ponytail: a const, not cubit state. Nothing exposes swapper availability, and the outage
   // is global. Wire it to real state if it ever needs to vary per user or resolve at runtime.
   static const bool swapsUnavailable = true;
+
+  /// Wind-down notice, carrying the exchange services, the disclaimer and the wallet we
+  /// recommend. Kept off the app so the options can change without shipping a release.
+  static const String moveFundsUrl = 'https://breez.technology/misty/';
 }
 
 class WebhookConstants {

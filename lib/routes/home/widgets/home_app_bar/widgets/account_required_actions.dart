@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 import 'package:misty_breez/cubit/cubit.dart';
 import 'package:misty_breez/routes/routes.dart';
+import 'package:misty_breez/services/services.dart';
 import 'package:misty_breez/utils/utils.dart';
 import 'package:misty_breez/widgets/widgets.dart';
 import 'package:service_injector/service_injector.dart';
@@ -80,8 +81,10 @@ class ServiceOutageWarningAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return WarningAction(
       onTap: () {
-        _logger.info('Display service outage notice.');
-        Navigator.of(context).pushNamed(ServiceOutagePage.routeName);
+        // Straight to the wind-down page: the in-app notice only repeats what is there, and
+        // anyone tapping this has already read it once on startup.
+        _logger.info('Opening the wind-down page.');
+        ExternalBrowserService.launchLink(context, linkAddress: ServiceOutage.moveFundsUrl);
       },
     );
   }
