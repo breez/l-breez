@@ -62,5 +62,3 @@ config.json
 
 # Swift Package Manager
 Package.resolved
-
-.planning/debug/
