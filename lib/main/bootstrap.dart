@@ -62,7 +62,7 @@ Future<void> bootstrap(AppBuilder builder) async {
       if (isOnboardingComplete) {
         _logger.info('Reconnect if secure storage has mnemonic.');
         final String? mnemonic = await injector.credentialsManager.restoreMnemonic();
-        if (mnemonic != null) {
+        if (mnemonic != null && await shouldConnectOnStartup()) {
           await sdkConnectivityCubit.reconnect(mnemonic: mnemonic);
         }
       }

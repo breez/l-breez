@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:misty_breez/handlers/handlers.dart';
+import 'package:misty_breez/main/startup_guard.dart';
 import 'package:misty_breez/routes/routes.dart';
 import 'package:misty_breez/widgets/widgets.dart';
 
@@ -38,6 +39,7 @@ class HomeState extends State<Home> with AutoLockMixin<Home>, HandlerContextProv
         handler.init(this);
       }
       showServiceOutageNoticeIfUnseen(context);
+      showStartedWithoutSdkNotice(context);
     });
   }
 
@@ -80,6 +82,7 @@ class HomeState extends State<Home> with AutoLockMixin<Home>, HandlerContextProv
             body: Text(texts.close_popup_message),
           );
           if (shouldPop ?? false) {
+            await markLaunchFinished();
             exit(0);
           }
         },

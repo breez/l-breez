@@ -6,6 +6,7 @@ import 'package:service_injector/service_injector.dart';
 export 'bootstrap.dart';
 export 'bootstrap_error_page.dart';
 export 'hydrated_bloc_storage.dart';
+export 'startup_guard.dart';
 
 void main() {
   bootstrap(
